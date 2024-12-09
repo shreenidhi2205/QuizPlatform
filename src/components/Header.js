@@ -25,6 +25,11 @@ const Header = () => {
         style={styles.logo}
       />
       <img 
+        src="/S-Brainiac.png" 
+        alt="Brainiac Logo" 
+        style={styles.logo}
+      />
+      <img 
         src="/WhatsApp Image 2024-12-07 at 14.37.53_a807a9fd (1).jpg" 
         alt="NMIET Logo" 
         style={styles.logo}
