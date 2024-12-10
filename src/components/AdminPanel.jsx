@@ -75,20 +75,26 @@ const AdminPanel = () => {
   };
 
   return (
-    <div style={{
-      padding: "20px",
-      fontFamily: "'Arial', sans-serif",
-      backgroundColor: "#f9f9f9",
-      borderRadius: "10px",
-      maxWidth: "1200px",
-      margin: "20px auto",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    }}>
-      <h2 style={{
-        textAlign: "center",
-        marginBottom: "20px",
-        color: "#333",
-      }}>Admin Panel - Student Results</h2>
+    <div
+      style={{
+        padding: "20px",
+        fontFamily: "'Arial', sans-serif",
+        backgroundColor: "#f9f9f9",
+        borderRadius: "10px",
+        maxWidth: "100%",
+        margin: "20px auto",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <h2
+        style={{
+          textAlign: "center",
+          marginBottom: "20px",
+          color: "#333",
+        }}
+      >
+        Admin Panel - Student Results
+      </h2>
 
       <button
         onClick={handleDownload}
@@ -109,57 +115,64 @@ const AdminPanel = () => {
         {loading ? "Downloading..." : "Download Excel"}
       </button>
 
-      <table style={{
-        width: "100%",
-        borderCollapse: "collapse",
-        backgroundColor: "white",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        borderRadius: "10px",
-        overflow: "hidden",
-      }}>
-        <thead>
-          <tr style={{
-            backgroundColor: "#6e91ff",  
-            color: "white",
-            textAlign: "left",
-          }}>
-            <th style={{ padding: "10px", borderRight: "1px solid #ddd" }}>Name</th>
-            <th style={{ padding: "10px", borderRight: "1px solid #ddd" }}>City</th>
-            <th style={{ padding: "10px", borderRight: "1px solid #ddd" }}>College</th>
-            <th style={{ padding: "10px", borderRight: "1px solid #ddd" }}>WhatsApp Number</th>
-            <th style={{ padding: "10px", borderRight: "1px solid #ddd" }}>Standard</th>
-            <th style={{ padding: "10px", borderRight: "1px solid #ddd" }}>Self-Actualization Score</th>
-            <th style={{ padding: "10px", borderRight: "1px solid #ddd" }}>Leadership Quality Score</th>
-            <th style={{ padding: "10px" }}>Emotional Intelligence Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {studentResults.length > 0 ? (
-            studentResults.map((testResults) => (
-              <tr key={testResults.id} style={{
-                borderBottom: "1px solid #ddd",
-              }}>
-                <td style={{ padding: "10px", borderRight: "1px solid #ddd" }}>{testResults.name}</td>
-                <td style={{ padding: "10px", borderRight: "1px solid #ddd" }}>{testResults.city}</td>
-                <td style={{ padding: "10px", borderRight: "1px solid #ddd" }}>{testResults.collegeName}</td>
-                <td style={{ padding: "10px", borderRight: "1px solid #ddd" }}>{testResults.whatsappNumber}</td>
-                <td style={{ padding: "10px", borderRight: "1px solid #ddd" }}>{testResults.standard}</td>
-                <td style={{ padding: "10px", borderRight: "1px solid #ddd" }}>{testResults.selfConfidenceScore}</td>
-                <td style={{ padding: "10px", borderRight: "1px solid #ddd" }}>{testResults.leadershipQualityScore}</td>
-                <td style={{ padding: "10px" }}>{testResults.emotionalIntelligenceScore}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="8" style={{
-                textAlign: "center",
-                padding: "20px",
-                color: "#666",
-              }}>No results available</td>
+      <div
+        style={{
+          overflowX: "auto",
+          border: "1px solid #ddd",
+          borderRadius: "10px",
+          marginTop: "20px",
+        }}
+      >
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            backgroundColor: "white",
+            minWidth: "900px", // Ensure a minimum width for the table
+          }}
+        >
+          <thead>
+            <tr
+              style={{
+                backgroundColor: "#6e91ff",
+                color: "white",
+                textAlign: "left",
+              }}
+            >
+              <th style={{ padding: "10px" }}>Name</th>
+              <th style={{ padding: "10px" }}>City</th>
+              <th style={{ padding: "10px" }}>College</th>
+              <th style={{ padding: "10px" }}>WhatsApp Number</th>
+              <th style={{ padding: "10px" }}>Standard</th>
+              <th style={{ padding: "10px" }}>Self-Actualization Score</th>
+              <th style={{ padding: "10px" }}>Leadership Quality Score</th>
+              <th style={{ padding: "10px" }}>Emotional Intelligence Score</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {studentResults.length > 0 ? (
+              studentResults.map((testResults) => (
+                <tr key={testResults.id} style={{ borderBottom: "1px solid #ddd" }}>
+                  <td style={{ padding: "10px" }}>{testResults.name}</td>
+                  <td style={{ padding: "10px" }}>{testResults.city}</td>
+                  <td style={{ padding: "10px" }}>{testResults.collegeName}</td>
+                  <td style={{ padding: "10px" }}>{testResults.whatsappNumber}</td>
+                  <td style={{ padding: "10px" }}>{testResults.standard}</td>
+                  <td style={{ padding: "10px" }}>{testResults.selfConfidenceScore}</td>
+                  <td style={{ padding: "10px" }}>{testResults.leadershipQualityScore}</td>
+                  <td style={{ padding: "10px" }}>{testResults.emotionalIntelligenceScore}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="8" style={{ textAlign: "center", padding: "20px", color: "#666" }}>
+                  No results available
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

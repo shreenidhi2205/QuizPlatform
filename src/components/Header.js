@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'react-router-dom';
 
 const Header = () => {
   const styles = {
@@ -12,8 +11,9 @@ const Header = () => {
       marginBottom: '20px',
     },
     logo: {
-      height: '80px',
-      width: 'auto',
+      maxWidth: '100%',
+    height: 'auto',
+    maxHeight: '50px',
     },
   };
 
@@ -39,4 +39,3 @@ const Header = () => {
 };
 
 export default Header;
-

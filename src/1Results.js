@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { jsPDF } from 'jspdf'; // Import jsPDF library
 import Header from './components/Header';
-import { db } from './services/firebaseConfig';  // Import Firebase config
-import { collection, addDoc } from 'firebase/firestore';  // Import Firestore methods
+import { db } from './services/firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore';
 
 const Results = () => {
   const [selfConfidenceScore, setSelfConfidenceScore] = useState(0);
@@ -78,8 +79,23 @@ const Results = () => {
     }
   };
 
+  const handleDownloadCertificate = () => {
+    const doc = new jsPDF('landscape'); // Set the PDF to landscape mode
+    const certificateImage = '/Certificate.png'; // Path to your certificate image
+  
+    doc.addImage(certificateImage, 'PNG', 10, 10, 270, 190); // Adjust dimensions to fit the PDF
+    doc.setFontSize(24);
+    doc.setTextColor(0, 0, 0);
+  
+    // Adjust the position of the student's name to the bottom left
+    const nameX = 85; // X-coordinate (closer to the left)
+    const nameY = 125; // Y-coordinate (closer to the bottom)
+    doc.text(formData.name, nameX, nameY);
+  
+    doc.save('certificate.pdf'); // Trigger download
+  };
+
   const styles = {
-    // Add your existing styles here...
     container: {
       fontFamily: "'Poppins', sans-serif",
       padding: '40px',
@@ -153,12 +169,41 @@ const Results = () => {
       padding: '12px',
       borderBottom: '1px solid #e8f4fd',
     },
-    logo:{
-      height: '80px',
-      width: 'auto',
-    }
+    image: {
+      width: '100%',
+      maxWidth: '400px',
+      margin: '20px auto',
+      display: 'block',
+    },
+    button: {
+      backgroundColor: '#28a745',
+      color: 'white',
+      padding: '12px 24px',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      fontSize: '1rem',
+      fontWeight: '600',
+      textAlign: 'center',
+      display: 'block',
+      margin: '20px auto 0',
+    },
+    '@media (max-width: 768px)': {
+      container: {
+        padding: '20px',
+      },
+      title: {
+        fontSize: '2rem',
+      },
+      description: {
+        fontSize: '0.9rem',
+      },
+      button: {
+        padding: '10px 20px',
+        fontSize: '0.9rem',
+      },
+    },
   };
-
   return (
     <>
       <Header />
@@ -267,10 +312,14 @@ const Results = () => {
               </tbody>
             </table>
             <img 
-        src="/Summary.png" 
-        alt="Summary" 
-        style={styles.logo}
-      />
+  src="/Summary.png" 
+  alt="Summary" 
+  style={styles.image}
+/>
+<button style={styles.button} onClick={handleDownloadCertificate}>
+  Download Certificate
+</button>
+
           </>
         )}
         
